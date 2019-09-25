@@ -20,7 +20,6 @@ describe('dogs api', () => {
   };
 
   function postDog(dog) {
-    console.log('in postdog', dog);
     return request
       .post('/api/dogs')
       .send(dog)
@@ -39,10 +38,10 @@ describe('dogs api', () => {
       });
   });
 
-  it.skip('gets a dog by id', () => {
+  it('gets a dog by id', () => {
     return postDog(akk)
       .then(dog => {
-        return request.get(`/api/dog/${dog._id}`)
+        return request.get(`/api/dogs/${dog._id}`)
           .expect(200)
           .then(({ body }) => {
             expect(body).toEqual(dog);

@@ -10,14 +10,14 @@ describe('core app api', () => {
       });
   });
 
-  it.skip('returns 404 on non-api bad path', () => {
+  it('returns 404 on non-api bad path', () => {
     return request
       .get('/bad-path')
       .expect(404)
       .expect('Content-Type', /text/);
   });
 
-  it.skip('returns application/json 404 on bad api path', () => {
+  it('returns application/json 404 on bad api path', () => {
     return request
       .post('/api/bad-path')
       .expect(404)
