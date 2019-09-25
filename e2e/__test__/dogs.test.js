@@ -49,7 +49,7 @@ describe('dogs api', () => {
       });
   });
 
-  it.skip('gets a list of dog', () => {
+  it('gets a list of dogs', () => {
     return Promise.all([
       postDog({ breed: 'Alaskan Klee Kai', nicknames: ['AKK', 'Klee Kai', 'Miniature Alaskan Husky', 'Mini Husky'], size: ['small', 'medium'], appearance: { pattern: 'bicolor', color: 'grey and white' }, weight: 16, purebred: true }),
       postDog({ breed: 'Alaskan Klee Kai2', nicknames: ['AKK', 'Klee Kai', 'Miniature Alaskan Husky', 'Mini Husky'], size: ['small', 'medium'], appearance: { pattern: 'bicolor', color: 'grey and white' }, weight: 16, purebred: true }),
