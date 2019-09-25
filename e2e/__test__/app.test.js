@@ -1,7 +1,7 @@
 const request = require('../request');
 
-describe.skip('core app api', () => {
-  it.skip('is alive', () => {
+describe('core app api', () => {
+  it('is alive', () => {
     return request
       .get('/hello')
       .expect(200)

@@ -1,63 +1,63 @@
 const request = require('../request');
 const db = require('../db');
 
-describe.skip('cats api', () => {
+describe('dogs api', () => {
 
   beforeEach(() => {
-    return db.dropCollection('cats');
+    return db.dropCollection('dogs');
   });
 
-  const felix = {
-    name: 'felix',
-    appearances: {
-      pattern: 'tuxedo',
-      mainColor: 'black'
+  const akk = {
+    breed: 'Alaskan Klee Kai',
+    nicknames: ['AKK', 'Klee Kai', 'Miniature Alaskan Husky', 'Mini Husky'],
+    size: ['small', 'medium'],
+    appearance: {
+      pattern: 'bicolor',
+      color: 'grey and white'
     },
-    lives: 9,
-    hasSidekick: false,
-    media: ['movies', 'comics'],
-    yearIntroduced: 1919,
+    weight: 16,
+    purebred: true
   };
 
-  function postCat(cat) {
+  function postDog(dog) {
     return request
-      .post('/api/cats')
-      .send(cat)
+      .post('/api/dogs')
+      .send(dog)
       .expect(200)
       .then(({ body }) => body);
   }
 
-  it.skip('post a cat', () => {
-    return postCat(felix)
-      .then(cat => {
-        expect(cat).toEqual({
+  it('post a dog', () => {
+    return postDog(akk)
+      .then(dog => {
+        expect(dog).toEqual({
           _id: expect.any(String),
           __v: 0,
-          ...felix
+          ...akk
         });
       });
   });
 
-  it.skip('gets a cat by id', () => {
-    return postCat(felix)
-      .then(cat => {
-        return request.get(`/api/cats/${cat._id}`)
+  it.skip('gets a dog by id', () => {
+    return postDog(akk)
+      .then(dog => {
+        return request.get(`/api/dog/${dog._id}`)
           .expect(200)
           .then(({ body }) => {
-            expect(body).toEqual(cat);
+            expect(body).toEqual(dog);
           });
       });
   });
 
-  it.skip('gets a list of cats', () => {
+  it.skip('gets a list of dog', () => {
     return Promise.all([
-      postCat({ name: 'cat 1', lives: 9, yearIntroduced: 2019 }),
-      postCat({ name: 'cat 2', lives: 9, yearIntroduced: 2019 }),
-      postCat({ name: 'cat 3', lives: 9, yearIntroduced: 2019 }),
+      postDog({ breed: 'Alaskan Klee Kai', nicknames: ['AKK', 'Klee Kai', 'Miniature Alaskan Husky', 'Mini Husky'], size: ['small', 'medium'], appearance: { pattern: 'bicolor', color: 'grey and white' }, weight: 16, purebred: true }),
+      postDog({ breed: 'Alaskan Klee Kai2', nicknames: ['AKK', 'Klee Kai', 'Miniature Alaskan Husky', 'Mini Husky'], size: ['small', 'medium'], appearance: { pattern: 'bicolor', color: 'grey and white' }, weight: 16, purebred: true }),
+      postDog({ breed: 'Alaskan Klee Kai3', nicknames: ['AKK', 'Klee Kai', 'Miniature Alaskan Husky', 'Mini Husky'], size: ['small', 'medium'], appearance: { pattern: 'bicolor', color: 'grey and white' }, weight: 16, purebred: true }),
     ])
       .then(() => {
         return request
-          .get('/api/cats')
+          .get('/api/dogs')
           .expect(200);
       })
       .then(({ body }) => {
@@ -65,25 +65,25 @@ describe.skip('cats api', () => {
       });
   });
 
-  it.skip('updates a cat', () => {
-    return postCat(felix)
-      .then(cat => {
-        cat.lives = 2;
+  it.skip('updates a dog', () => {
+    return postDog(akk)
+      .then(dog => {
+        dog.weight = 10;
         return request
-          .put(`/api/cats/${cat._id}`)
-          .send(cat)
+          .put(`/api/dogs/${dog._id}`)
+          .send(dog)
           .expect(200);
       })
       .then(({ body }) => {
-        expect(body.lives).toBe(2);
+        expect(body.lives).toBe(10);
       });
   });
 
-  it.skip('deletes a cat', () => {
-    return postCat(felix)
-      .then(cat => {
+  it.skip('deletes a dog', () => {
+    return postDog(akk)
+      .then(dog => {
         return request
-          .delete(`/api/cats/${cat._id}`)
+          .delete(`/api/dogs/${dog._id}`)
           .expect(200);
       });
   });
